@@ -8,6 +8,7 @@ import "./globals.css";
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,7 @@ export default function RootLayout({
           {/* Sidebar */}
           <aside className="w-64 border-r bg-white fixed h-full">
             <div className="p-4">
-              <img src="/placeholder.svg" alt="Logo" className="h-8" />
+              <Image src="/placeholder.svg" alt="Logo" width={32} height={32} />
             </div>
 
             <nav className="mt-4">
