@@ -1,8 +1,13 @@
+"use client";
+
 import { Bell, Search, LogOut, Moon, Settings, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +16,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isLoginPage = pathname === "/login";
+
+  if (isLoginPage) {
+    return (
+      <html lang="en">
+        <body className={inter.className}>
+          <div className="min-h-screen flex bg-gray-50">{children}</div>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -53,7 +71,7 @@ export default function RootLayout({
                 ACCOUNT PAGES
               </div>
               <NavItem href="/profile" icon="👤" label="Profile" />
-              <NavItem href="/logout" icon="🚪" label="Logout" />
+              <NavItem href="/login" icon="🚪" label="Logout" />
             </nav>
 
             {/* Help Widget */}
@@ -87,7 +105,9 @@ export default function RootLayout({
                   <Moon className="h-4 w-4" />
                 </Button>
                 <Button variant="ghost" size="icon">
-                  <LogOut className="h-4 w-4" />
+                  <Link href="/login">
+                    <LogOut className="h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </header>
