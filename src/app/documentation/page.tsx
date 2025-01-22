@@ -30,9 +30,9 @@ const metrics = [
 
 export default function Documentation() {
   return (
-    <div className="flex h-[calc(100vh-5rem)]">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-5rem)]">
       {/* Left Sidebar */}
-      <div className="w-64 border-r bg-gray-50 p-4">
+      <div className="w-full md:w-64 border-b md:border-r bg-gray-50 p-4">
         <nav className="space-y-2">
           <a href="#" className="block px-2 py-1 text-sm">
             Introduction
@@ -53,8 +53,8 @@ export default function Documentation() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
-        <div className="max-w-3xl">
+      <div className="flex-1 p-4 md:p-6 overflow-auto">
+        <div className="max-w-3xl mx-auto">
           <h1 className="text-2xl font-medium text-gray-700 mb-6">
             Metric Glossary
           </h1>
@@ -86,7 +86,7 @@ export default function Documentation() {
       </div>
 
       {/* Right Sidebar - Quick Links */}
-      <ScrollArea className="w-64 border-l bg-gray-50">
+      <ScrollArea className="hidden lg:block w-64 border-l bg-gray-50">
         <div className="p-4 space-y-2">
           <h3 className="font-medium mb-4">Quick Links</h3>
           {metrics.map((metric, index) => (

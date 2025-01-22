@@ -17,20 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-type ProductAllocation = {
-  required: number;
-  onHand: number;
-  onOrder: number;
-};
-
-type AllocationData = {
-  project: string;
-  products: {
-    [key: string]: ProductAllocation;
-  };
-};
-
-const allocationData: AllocationData[] = [
+const allocationData = [
   {
     project: "2449 Willow Avenue",
     products: {
@@ -54,8 +41,8 @@ const allocationData: AllocationData[] = [
 
 export default function InventoryAllocation() {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-start">
+    <div className="space-y-6 p-4 md:p-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
         <div>
           <h1 className="text-2xl font-medium text-gray-700 mb-2">
             Inventory Allocation Report
@@ -64,9 +51,9 @@ export default function InventoryAllocation() {
             This report shows inventory allocated to each job
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <Select>
-            <SelectTrigger className="w-[200px]">
+            <SelectTrigger className="w-full sm:w-[200px]">
               <SelectValue placeholder="Select Jobs" />
             </SelectTrigger>
             <SelectContent>
@@ -75,7 +62,7 @@ export default function InventoryAllocation() {
           </Select>
 
           <Select>
-            <SelectTrigger className="w-[200px]">
+            <SelectTrigger className="w-full sm:w-[200px]">
               <SelectValue placeholder="Select Products" />
             </SelectTrigger>
             <SelectContent>
@@ -83,17 +70,23 @@ export default function InventoryAllocation() {
             </SelectContent>
           </Select>
 
-          <Button variant="secondary">Download CSV</Button>
+          <Button variant="secondary" className="w-full sm:w-auto">
+            Download CSV
+          </Button>
         </div>
       </div>
 
       <div className="border rounded-lg overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead rowSpan={2}>Project</TableHead>
-              {Object.keys(allocationData[0].products).map(
-                (product: string) => (
+        <div className="min-w-[1000px]">
+          {" "}
+          {/* Ensure minimum width for small screens */}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="sticky left-0 bg-white z-20">
+                  Project
+                </TableHead>
+                {Object.keys(allocationData[0].products).map((product) => (
                   <TableHead
                     key={product}
                     colSpan={3}
@@ -101,36 +94,45 @@ export default function InventoryAllocation() {
                   >
                     {product}
                   </TableHead>
-                )
-              )}
-            </TableRow>
-            <TableRow>
-              {Object.keys(allocationData[0].products).map(() => (
-                <>
-                  <TableHead className="border-l">Quantity Required</TableHead>
-                  <TableHead>Quantity On Hand</TableHead>
-                  <TableHead>Quantity On Order</TableHead>
-                </>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {allocationData.map((row, index) => (
-              <TableRow key={index}>
-                <TableCell>{row.project}</TableCell>
-                {Object.values(row.products).map((product) => (
-                  <>
-                    <TableCell className="border-l">
-                      {product.required}
-                    </TableCell>
-                    <TableCell>{product.onHand}</TableCell>
-                    <TableCell>{product.onOrder}</TableCell>
-                  </>
                 ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+              <TableRow>
+                <TableHead className="sticky left-0 bg-white z-20"></TableHead>
+                {Object.keys(allocationData[0].products).map(
+                  (product, index) => (
+                    <>
+                      <TableHead key={index} className="border-l">
+                        Quantity Required
+                      </TableHead>
+                      <TableHead key={`${index}-1`}>Quantity On Hand</TableHead>
+                      <TableHead key={`${index}-2`}>
+                        Quantity On Order
+                      </TableHead>
+                    </>
+                  )
+                )}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {allocationData.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell className="sticky left-0 bg-white z-10">
+                    {row.project}
+                  </TableCell>
+                  {Object.values(row.products).map((product) => (
+                    <>
+                      <TableCell className="border-l">
+                        {product.required}
+                      </TableCell>
+                      <TableCell>{product.onHand}</TableCell>
+                      <TableCell>{product.onOrder}</TableCell>
+                    </>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

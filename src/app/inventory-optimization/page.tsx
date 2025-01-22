@@ -54,8 +54,8 @@ const purchaseOrders = [
 
 export default function InventoryOptimization() {
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex justify-between items-start">
+    <div className="space-y-6 p-4 md:p-6">
+      <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-start">
         <div>
           <h1 className="text-2xl font-medium text-gray-700 mb-2">
             Purchase Order Generation
@@ -66,7 +66,7 @@ export default function InventoryOptimization() {
             the recommended products and quantities.
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col w-full gap-2 md:flex-row md:items-center md:gap-4 md:w-auto">
           <Select>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="123 Easy St" />
@@ -86,7 +86,7 @@ export default function InventoryOptimization() {
           Purchase Orders for 123. Easy St.
         </h2>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col w-full gap-2 sm:flex-row sm:items-center sm:gap-4">
           <Select>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="ISI Distributors" />
@@ -100,7 +100,7 @@ export default function InventoryOptimization() {
           <Button variant="secondary">Download All</Button>
         </div>
 
-        <div className="border rounded-lg">
+        <div className="border rounded-lg overflow-x-auto -mx-4 md:mx-0">
           <Table>
             <TableHeader>
               <TableRow>

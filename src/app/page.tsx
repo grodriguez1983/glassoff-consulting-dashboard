@@ -46,13 +46,13 @@ export default function InventoryDashboard() {
   const [dateRange] = useState("Jan 1, 2023 - Sep 30, 2024");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-4 md:p-6">
       <h1 className="text-2xl font-medium text-gray-700">
         Inventory Analysis Dashboard
       </h1>
 
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Select defaultValue={dateRange}>
           <SelectTrigger>
             <SelectValue>{dateRange}</SelectValue>
@@ -91,12 +91,14 @@ export default function InventoryDashboard() {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {metrics.map((metric, index) => (
           <Card key={index}>
             <CardContent className="pt-6">
               <div className="text-sm text-gray-500">{metric.label}</div>
-              <div className="text-2xl font-semibold mt-2">{metric.value}</div>
+              <div className="text-xl sm:text-2xl font-semibold mt-2">
+                {metric.value}
+              </div>
             </CardContent>
           </Card>
         ))}
